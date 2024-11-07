@@ -1,0 +1,29 @@
+body, html {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+#map {
+    height: 100%;
+}
+.popup-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 600px;
+    max-height: 400px;
+    transition: opacity 0.3s;
+}
+
+#image-display {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 600px;
+    height: 400px;
+    display: none;
+    background: transparent;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
