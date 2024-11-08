@@ -109,14 +109,22 @@ main {
 /* /////////////////////////////////////header shii//////////////////////////////////////// */
 
 
-nav {
+  nav {
     width: 50%;
     margin: 0 auto;
     padding: 50px 0;
+    display: flex;
+    justify-content:center ;
+    align-items: center;
   }
+
   nav ul {
     list-style: none;
     text-align: center;
+    width: 400px;
+    display: flex;
+    justify-content:center ;
+    align-items: center;
   }
   nav ul li {
     display: inline-block;
