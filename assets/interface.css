@@ -6,64 +6,7 @@
     box-sizing: border-box;
 }
 
-@keyframes initialZoom {
-    0% {
-        background-size: 0%;
-    }
-    100% {
-        background-size: 150%;
-    }
-}
-
-@keyframes breatheBackground {
-    0% {
-        background-size: 150%;
-    }
-    50% {
-        background-size: 155%;
-    }
-    100% {
-        background-size: 150%;
-    }
-}
-
-@keyframes RotateBackground {
-    0% {
-        background-size: 150%;
-    }
-    50% {
-        background-size: 155%;
-    }
-    100% {
-        background-size: 150%;
-    }
-}
-
-@keyframes RotateBackground {
-    0% {
-        background-position: center center;
-    }
-    25% {
-        background-position: calc(50% - 10px) calc(50% - 10px);
-    }
-    50% {
-        background-position: center center;
-    }
-    75% {
-        background-position: calc(50% + 10px) calc(50% + 10px); 
-    }
-    100% {
-        background-position: center center; 
-    }
-}
-
 body {
-    background-color: black;
-    background-image: url('irt2.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,10 +15,6 @@ body {
     padding: 0;
     box-sizing: border-box;
     text-align: center;
-    overflow: hidden;
-    animation: initialZoom 0.5s ease-out forwards, 
-                breatheBackground 5s ease-in infinite 0.5s, 
-                RotateBackground 8s ease-in-out infinite;
 }
 
 
