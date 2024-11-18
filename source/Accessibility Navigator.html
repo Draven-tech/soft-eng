@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWD Ramps Map</title>
+    <link rel="stylesheet" href="assets/leaflet.css" />
+    <link rel="stylesheet" href="assets/style.css">
+    <!-- Include Leaflet Routing Machine CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+</head>
+<body>
+
+    <div id="map"></div>
+    <div id="image-display"><img id="ramp-image" class="popup-image" alt="Ramp Image"></div>
+
+    <script src="assets/leaflet.js"></script>
+    <!-- Include Leaflet Routing Machine JS -->
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script>
+        const map = L.map('map').setView([10.3157, 123.8854], 12);
+
+        // Add Esri's World Imagery tile layer for satellite imagery
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.esri.com">Esri</a> &mdash; Imagery &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        const customIcon = L.icon({
+            iconUrl: 'assets/ramp-icon.png',
+            iconSize: [50, 50],
+            iconAnchor: [25, 50],
+            popupAnchor: [0, -50]
+        });
+
+        const ramps = [
+            // SM Seaside
+            { lat: 10.2819, lng: 123.8797, name: "SM Seaside Ramp 0", img: "ramp-images/smseasideramp2.png" },
+            { lat: 10.2805, lng: 123.8803, name: "SM Seaside Ramp 2", img: "ramp-images/smseasideramp3.png" },
+            { lat: 10.2802904, lng: 123.8817879, name: "SM Seaside Ramp 3", img: "ramp-images/smseasideramp0.png" },
+            { lat: 10.2803814, lng: 123.8818149, name: "SM Seaside Ramp 4", img: "ramp-images/smseasideramp1.png" },
+            { lat: 10.2836007, lng: 123.8809455, name: "SM Seaside Ramp 5", img: "ramp-images/smseasideramp4.png" },
+            { lat: 10.2835658, lng: 123.8808603, name: "SM Seaside Ramp 6", img: "ramp-images/smseasideramp5.png" },
+            { lat: 10.2831078, lng: 123.8801814, name: "SM Seaside Ramp 7", img: "ramp-images/smseasideramp6.png" },
+            { lat: 10.28218,   lng: 123.88284,   name: "SM Seaside Ramp 8", img: "ramp-images/smseasideramp7.png" },
+            { lat: 10.28317,   lng: 123.88171,   name: "SM Seaside Ramp 8", img: "ramp-images/smseasideramp8.png" },
+
+
+            // Basak Campus
+            { lat: 10.289165284594507, lng: 123.86204742045474, name: "USJR Basak Ramp 0", img: "ramp-images/usjrBasakRamp0.png" },
+            { lat: 10.289359256615821, lng: 123.8618569836098, name: "USJR Basak Ramp 1", img: "ramp-images/usjrBasakRamp1.png" },
+            { lat: 10.289503086131752, lng: 123.8618945345369, name: "USJR Basak Ramp 2", img: "ramp-images/usjrBasakRamp2.png" },
+            { lat: 10.289141532911959, lng: 123.86144794672518, name: "USJR Basak Ramp 3", img: "ramp-images/usjrBasakRamp3.png" },
+            { lat: 10.289885751508965, lng: 123.86114485710499, name: "USJR Basak Ramp 4", img: "ramp-images/usjrBasakRamp4.png" },
+            { lat: 10.290451168352979, lng: 123.86104316058106, name: "USJR Basak Ramp 5", img: "ramp-images/usjrBasakRamp5.png" },
+            { lat: 10.290350195628227, lng: 123.86092700439966, name: "USJR Basak Ramp 6", img: "ramp-images/usjrBasakRamp6.png" },
+        ];
+
+        const markers = ramps.map(ramp => {
+            const marker = L.marker([ramp.lat, ramp.lng], { icon: customIcon }).addTo(map);
+
+            marker.bindPopup(ramp.name);
+
+            marker.on('click touchstart', (e) => {
+                e.originalEvent.stopPropagation();
+                const imageDisplay = document.getElementById('image-display');
+                const rampImage = document.getElementById('ramp-image');
+
+                rampImage.src = ramp.img || '';
+               
+                if (ramp.img) {
+                    imageDisplay.style.display = 'block';
+                    setTimeout(() => {
+                        imageDisplay.style.opacity = 1;
+                    }, 10);
+                } else {
+                    imageDisplay.style.display = 'none';
+                }
+
+                // Calculate and display route when a ramp marker is clicked
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(position => {
+                        const userLat = position.coords.latitude;
+                        const userLng = position.coords.longitude;
+
+                        // Create a route from user to the selected ramp
+                        const userLocation = L.latLng(userLat, userLng);
+                        const rampLocation = L.latLng(ramp.lat, ramp.lng);
+
+                        // Check if a route exists already, if yes, remove it
+                        if (window.routeControl) {
+                            map.removeControl(window.routeControl);
+                        }
+
+                        // Create a new routing control
+                        window.routeControl = L.Routing.control({
+                            waypoints: [userLocation, rampLocation],
+                            routeWhileDragging: true
+                        }).addTo(map);
+                    }, () => {
+                        alert("Unable to retrieve your location.");
+                    });
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                }
+            });
+
+            return marker;
+        });
+
+        function updateMarkerVisibility() {
+            const zoomLevel = map.getZoom();
+            markers.forEach(marker => {
+                if (zoomLevel < 17) {
+                    map.removeLayer(marker);
+                } else {
+                    marker.addTo(map);
+                }
+            });
+
+            const imageDisplay = document.getElementById('image-display');
+            imageDisplay.style.display = zoomLevel < 17 ? 'none' : imageDisplay.style.display;
+            imageDisplay.style.opacity = zoomLevel < 17 ? 0 : imageDisplay.style.opacity;
+        }
+
+        map.on('zoomend', updateMarkerVisibility);
+
+        document.addEventListener('click', () => {
+            const imageDisplay = document.getElementById('image-display');
+            if (imageDisplay.style.display === 'block') {
+                imageDisplay.style.display = 'none';
+                imageDisplay.style.opacity = 0;
+            }
+        });
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const userLat = position.coords.latitude;
+                const userLng = position.coords.longitude;
+
+                const userMarker = L.marker([userLat, userLng]).addTo(map)
+                    .bindPopup("You are here")
+                    .openPopup();
+
+                map.setView([userLat, userLng], 15);
+            }, () => {
+                alert("Unable to retrieve your location.");
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    </script>
+</body>
+</html>
