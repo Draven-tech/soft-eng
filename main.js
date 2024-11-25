@@ -52,13 +52,12 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 2); // Soft light, low int
 scene.add(ambientLight);
 
 
-//////////////////////////////////////////////////////////
-
+////////////////////////////////////////////////////////// controll movement thru mouse
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
-controls.maxPolarAngle = Math.PI / 2; 
-controls.minPolarAngle = Math.PI / 2;
+// controls.maxPolarAngle = Math.PI / 2; 
+// controls.minPolarAngle = Math.PI / 2;
 
 
 function addStar() {
@@ -108,3 +107,21 @@ function animate(){
 
 
 animate()
+
+
+
+///////////////////harmbuger menu js /////////////////////////
+
+const hamMenu = document.querySelector(".ham-menu");
+
+const offScreenMenu = document.querySelector(".off-screen-menu");
+
+const overlay = document.querySelector('.overlay');
+
+hamMenu.addEventListener("click", () => {
+  hamMenu.classList.toggle("active");
+  offScreenMenu.classList.toggle("active");
+  overlay.classList.toggle('active');
+});
+
+////////////////////////////////////////////////////////////////

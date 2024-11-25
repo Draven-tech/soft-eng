@@ -7,32 +7,55 @@
     <link rel="stylesheet" href="assets/interface.css">
   </head>
   <body>
-    <canvas id="bg"></canvas>
+    
 
     <header>
-      <a href="index.html" class="logoSection">
+
+      <div href="index.html" class="logoSection">
           <img src="assets/accessnav.png" alt="Logo" class="logo">
           <span class="page-name">Accessibility Navigator</span>
-      </a>
+      </div>
 
-      <nav class="stroke">
-          <ul>
-            <li><a href="Accessibility Navigator.html">Map</a></li>
-            <li><a href="index.html">About</a></li>
-            <li><a href="index.html">Resources</a></li>
-          </ul>
+      <!-- ----------------hamburger menu------------------------- -->
+      
+      <div class="off-screen-menu">
+        <ul>
+          <li><a href="#">home</a></li>
+          <li><a href="#">about</a></li>
+          <li><a href="#">contact</a></li>
+        </ul>
+      </div>
+  
+      <nav>
+        <div class="ham-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </nav>
+  
+      <div class="overlay"></div>
+      <!-- ---------------------------------------- -->
 
-      <div class="buttons">
+
+
+      <!-- <div>
+        <a href="Accessibility Navigator.html">Map</a>
+        <a href="index.html">About</a>
+        <a href="index.html">Resources</a>
+      </div> -->
+
+
+      <!-- <div class="buttons">
           <a href="#">Login</a>
           <a href="#">Signup</a>
-      </div>
+      </div> -->
   </header>
   <main>
 
       
   </main>
-
+  <canvas id="bg"></canvas>
     <script type="module" src="main.js"></script>
   </body>
 </html>
