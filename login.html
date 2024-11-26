@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Navigator</title>
+    <link rel="stylesheet" href="assets/loginStyle.css">
+</head>
+<header>
+    <div href="index.html" class="logoSection">
+        <img src="assets/accessnav.png" alt="Logo" class="logo">
+        <span class="page-name">Accessibility Navigator</span>
+    </div>
+
+    <!-- ----------------hamburger menu------------------------- -->
+    
+    <div class="off-screen-menu">
+      <ul>
+        <li><a href="login.html">login</a></li>
+        <li><a href="index.html">home</a></li>
+        <li><a href="Accessibility Navigator.html">Map</a></li>
+        <li><a href="#">about</a></li>
+        <li><a href="#">contact</a></li>
+      </ul>
+    </div>
+
+    <nav>
+      <div class="ham-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <div class="overlay"></div>
+</header>
+
+<body>
+    
+    <div class="container">
+        <p class="sign">Sign in</p>
+        <form class="form1">
+            <input class="un" type="text" placeholder="Username">
+            <input class="pass" type="password" placeholder="Password">
+            <a class="submit">Sign in</a>
+            <p class="forgot"><a href="#">Forgot Password?</a></p>
+        </form>
+    </div>
+
+
+
+    <script>
+        const hamMenu = document.querySelector(".ham-menu");
+        const offScreenMenu = document.querySelector(".off-screen-menu");
+        const overlay = document.querySelector('.overlay');
+        const container = document.querySelector('.container');
+
+        hamMenu.addEventListener("click", () => {
+        hamMenu.classList.toggle("active");
+        offScreenMenu.classList.toggle("active");
+        overlay.classList.toggle('active');
+        });
+
+    </script>
+</body>
+</html>
