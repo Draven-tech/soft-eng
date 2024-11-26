@@ -28,7 +28,7 @@ header {
     align-items: center;
     padding: 10px 20px;
     background-color: #f4f4f400;
-    z-index: 1000; 
+    z-index: 10; 
     height: 100px;
     color: rgba(245, 245, 245, 0.534) ;
 }
@@ -119,8 +119,13 @@ a:hover {
 }
 
 .off-screen-menu ul li a {
+  text-transform: capitalize;
   text-decoration: none; 
   color: white; 
+}
+
+.off-screen-menu ul li a:hover {
+  color:#8a8a8a; 
 }
 
 .off-screen-menu.active {
@@ -134,7 +139,6 @@ nav {
   display:flex;
   justify-content: flex-end; 
   align-items: center; 
-  padding: 0 20px; 
 }
 
 

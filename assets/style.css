@@ -23,7 +23,182 @@ body, html {
     height: 400px;
     display: none;
     background: transparent;
-    z-index: 1000;
+    z-index: -100;
     opacity: 0;
     transition: opacity 0.5s ease;
 }
+
+/* ///////////////////////header////////////////////// */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(66, 66, 66, 0.8); /* Ensure header has some visibility */
+    z-index: 1000; /* Ensure header is above other elements */
+    height: 100px;
+    color: rgba(245, 245, 245, 0.534);
+    transition: background-color 0.3s ease; /* Add a smooth effect */
+}
+
+
+/* ///////////////////LOGO///////////////////////////////////////// */
+
+.logoSection{
+    display: flex;
+    text-decoration: none;
+    justify-content: center ;
+    align-items: center;
+    width: 25%;
+  }
+  
+  .logo-link {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    margin-top: 2%;
+    width: 30%;
+    height: 30%;
+  }
+  
+
+  .page-name {
+    font-size: 1.3vw;
+    color: white;
+    font-weight: bold;
+  }
+
+/* ////////////////////////////humbuger menu ///////////////////////////// */
+
+
+a {
+  color: white;
+}
+a:visited {
+  color: white;
+}
+a:hover {
+  color: #b6b6b6;
+}
+
+
+
+/* off-screen-menu */
+.off-screen-menu {
+    background-color: rgb(66, 66, 66);
+    height: 100vh;
+    width: 100%;
+    max-width: 300px;
+    position: fixed;
+    top: 0;
+    right: -450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: flex-start;
+    text-align: center;
+    font-size: 3rem;
+    transition: .3s ease;
+    z-index: 1000; /* Above overlay but below ham-menu */
+}
+
+.off-screen-menu ul {
+  list-style-type: none;
+  padding: 0; 
+  margin: 0; 
+}
+
+.off-screen-menu ul li a {
+  text-transform: capitalize;
+  text-decoration: none; 
+  color: white; 
+}
+
+.off-screen-menu ul li a:hover {
+  color:#8a8a8a; 
+}
+
+.off-screen-menu.active {
+  right: 0;
+}
+
+
+
+nav {
+  padding: 1rem;
+  display:flex;
+  justify-content: flex-end; 
+  align-items: center; 
+}
+
+
+.ham-menu {
+    height: 45px;
+    width: 30px;
+    position: relative;
+    z-index: 1500; /* Higher than the header and overlay */
+    cursor: pointer; /* Ensure it indicates interactivity */
+}
+
+.ham-menu span {
+  display: block;
+  height: 5px;
+  width: 100%;
+  background-color: #8a8a8a;
+  border-radius: 25px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: .3s ease;
+}
+.ham-menu span:nth-child(1) {
+  top: 25%;
+}
+.ham-menu span:nth-child(3) {
+  top: 75%;
+}
+.ham-menu.active span {
+  background-color: white;
+}
+.ham-menu.active span:nth-child(1) {
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.ham-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+.ham-menu.active span:nth-child(3) {
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Overlay */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px); 
+    z-index: 500; /* Below the ham-menu */
+    opacity: 0; 
+    pointer-events: none; /* Prevent blocking clicks when inactive */
+    transition: opacity 0.3s ease;
+}
+
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+/* ////////////////////////////////////////////////////////////// */
