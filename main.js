@@ -38,9 +38,9 @@ const material = new THREE.MeshStandardMaterial({
 }); 
 const sphere = new THREE.Mesh( geometry, material ); scene.add( sphere );
 scene.add(sphere);
-sphere.position.set(0, -8, 2); //position ang sphere 
+sphere.position.set(0, -8, 0); //position ang sphere 
 sphere.rotation.y = Math.PI / 1.2; //start at the ph
-sphere.rotation.x = Math.PI/ -11; //tilt backward
+// sphere.rotation.x = Math.PI/ -11; //tilt backward
 
 
 
@@ -56,8 +56,10 @@ scene.add(ambientLight);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
-// controls.maxPolarAngle = Math.PI / 2; 
-// controls.minPolarAngle = Math.PI / 2;
+controls.maxPolarAngle = Math.PI / 2; 
+controls.minPolarAngle = Math.PI / 2;
+controls.enableZoom = false;
+controls.enablePan = false;
 
 
 function addStar() {
